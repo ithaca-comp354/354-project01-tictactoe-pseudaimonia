@@ -11,78 +11,101 @@ public class SRPlayer implements TicTacToePlayer{
     public Pair<Integer, Integer> chooseSquare(TicTacToeBoard curBoard, char yourSymbol) {
 
         String boardSpacesByRow = curBoard.buildSquaresString();
-        String boardSpacesByCol = new char[] {boardSpacesByRow.charAt(0), boardSpacesByRow.charAt(3), boardSpacesByRow.charAt(6), 
+        String boardSpacesByCol = new String(new char[] {boardSpacesByRow.charAt(0), boardSpacesByRow.charAt(3), boardSpacesByRow.charAt(6), 
             boardSpacesByRow.charAt(1),boardSpacesByRow.charAt(4), boardSpacesByRow.charAt(7),
-            boardSpacesByRow.charAt(2),boardSpacesByRow.charAt(5),boardSpacesByRow.charAt(8)}.toString();
-        String diagonals = new char[] {boardSpacesByRow.charAt(0), boardSpacesByRow.charAt(4), boardSpacesByRow.charAt(8),
-            boardSpacesByRow.charAt(2), boardSpacesByRow.charAt(4), boardSpacesByRow.charAt(6)}.toString();
+            boardSpacesByRow.charAt(2),boardSpacesByRow.charAt(5),boardSpacesByRow.charAt(8)});
+        String diagonals = new String(new char[] {boardSpacesByRow.charAt(0), boardSpacesByRow.charAt(4), boardSpacesByRow.charAt(8),
+            boardSpacesByRow.charAt(2), boardSpacesByRow.charAt(4), boardSpacesByRow.charAt(6)});
+        
+        System.out.println(boardSpacesByCol);
+        System.out.println(diagonals);
 
         char otherSymbol = "XO".split(Character.toString(yourSymbol))[0].charAt(0);
 
         for(int i=0;i<=6;i+=3){
-            if(boardSpacesByRow.substring(i,i+3).compareTo(new char[] {yourSymbol, yourSymbol, ' ' }.toString())==0){
-                return new Pair<Integer,Integer>(i/3,2);
-            }
-            if(boardSpacesByRow.substring(i,i+3).compareTo(new char[] {' ', yourSymbol, yourSymbol }.toString())==0){
-                return new Pair<Integer,Integer>(i/3,0);
-            }
-            if(boardSpacesByRow.substring(i,i+3).compareTo( new char[] {yourSymbol, ' ' ,yourSymbol }.toString())==0){
-                return new Pair<Integer,Integer>(i/3,1);
-            }
-        }
-        for(int i=0;i<=6;i+=3){
-            if(boardSpacesByCol.substring(i,i+3).compareTo(new char[] {yourSymbol, yourSymbol, ' ' }.toString())==0){
+            if(boardSpacesByRow.substring(i,i+3).compareTo(new String(new char[] {yourSymbol, yourSymbol, ' ' }))==0){
                 return new Pair<Integer,Integer>(2,i/3);
             }
-            if(boardSpacesByCol.substring(i,i+3).compareTo(new char[] {' ', yourSymbol, yourSymbol }.toString())==0){
+            if(boardSpacesByRow.substring(i,i+3).compareTo(new String(new char[] {' ', yourSymbol, yourSymbol }))==0){
                 return new Pair<Integer,Integer>(0,i/3);
             }
-            if(boardSpacesByCol.substring(i,i+3).compareTo( new char[] {yourSymbol, ' ' ,yourSymbol }.toString())==0){
+            if(boardSpacesByRow.substring(i,i+3).compareTo(new String(new char[] {yourSymbol, ' ' ,yourSymbol }))==0){
                 return new Pair<Integer,Integer>(1,i/3);
             }
         }
+        for(int i=0;i<=6;i+=3){
+            if(boardSpacesByCol.substring(i,i+3).compareTo(new String(new char[] {yourSymbol, yourSymbol, ' ' }))==0){
+                return new Pair<Integer,Integer>(i/3,2);
+            }
+            if(boardSpacesByCol.substring(i,i+3).compareTo(new String(new char[] {' ', yourSymbol, yourSymbol }))==0){
+                return new Pair<Integer,Integer>(i/3,0);
+            }
+            if(boardSpacesByCol.substring(i,i+3).compareTo(new String(new char[] {yourSymbol, ' ' ,yourSymbol }))==0){
+                return new Pair<Integer,Integer>(i/3,1);
+            }
+        }
         for(int i=0;i<6;i+=3){
-            if(diagonals.substring(i,i+3).compareTo(new char[] {yourSymbol, yourSymbol, ' ' }.toString())==0){
-                return new Pair<Integer,Integer>(2,2);
+            if(i<3){
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {yourSymbol, yourSymbol, ' ' }))==0){
+                    return new Pair<Integer,Integer>(2,2);
+                }
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {' ', yourSymbol, yourSymbol }))==0){
+                    return new Pair<Integer,Integer>(0,0);
+                }
             }
-            if(diagonals.substring(i,i+3).compareTo(new char[] {' ', yourSymbol, yourSymbol }.toString())==0){
-                return new Pair<Integer,Integer>(0,0);
+            else{
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {yourSymbol, yourSymbol, ' ' }))==0){
+                    return new Pair<Integer,Integer>(0,2);
+                }
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {' ', yourSymbol, yourSymbol }))==0){
+                    return new Pair<Integer,Integer>(2,0);
+                }
             }
-            if(diagonals.substring(i,i+3).compareTo( new char[] {yourSymbol, ' ' ,yourSymbol }.toString())==0){
+            if(diagonals.substring(i,i+3).compareTo( new String(new char[] {yourSymbol, ' ' ,yourSymbol }))==0){
                 return new Pair<Integer,Integer>(1,1);
             }
         }
         // Blocking
         for(int i=0;i<=6;i+=3){
-            if(boardSpacesByRow.substring(i,i+3).compareTo(new char[] {otherSymbol, otherSymbol, ' ' }.toString())==0){
-                return new Pair<Integer,Integer>(i/3,2);
-            }
-            if(boardSpacesByRow.substring(i,i+3).compareTo(new char[] {' ', otherSymbol, otherSymbol }.toString())==0){
-                return new Pair<Integer,Integer>(i/3,0);
-            }
-            if(boardSpacesByRow.substring(i,i+3).compareTo( new char[] {otherSymbol, ' ' ,otherSymbol }.toString())==0){
-                return new Pair<Integer,Integer>(i/3,1);
-            }
-        }
-        for(int i=0;i<=6;i+=3){
-            if(boardSpacesByCol.substring(i,i+3).compareTo(new char[] {otherSymbol, otherSymbol, ' ' }.toString())==0){
+            if(boardSpacesByRow.substring(i,i+3).compareTo(new String(new char[] {otherSymbol, otherSymbol, ' ' }))==0){
                 return new Pair<Integer,Integer>(2,i/3);
             }
-            if(boardSpacesByCol.substring(i,i+3).compareTo(new char[] {' ', otherSymbol, otherSymbol }.toString())==0){
+            if(boardSpacesByRow.substring(i,i+3).compareTo(new String(new char[] {' ', otherSymbol, otherSymbol }))==0){
                 return new Pair<Integer,Integer>(0,i/3);
             }
-            if(boardSpacesByCol.substring(i,i+3).compareTo( new char[] {otherSymbol, ' ' ,otherSymbol }.toString())==0){
+            if(boardSpacesByRow.substring(i,i+3).compareTo(new String(new char[] {otherSymbol, ' ' ,otherSymbol }))==0){
                 return new Pair<Integer,Integer>(1,i/3);
             }
         }
+        for(int i=0;i<=6;i+=3){
+            if(boardSpacesByCol.substring(i,i+3).compareTo(new String(new char[] {otherSymbol, otherSymbol, ' ' }))==0){
+                return new Pair<Integer,Integer>(i/3,2);
+            }
+            if(boardSpacesByCol.substring(i,i+3).compareTo(new String(new char[] {' ', otherSymbol, otherSymbol }))==0){
+                return new Pair<Integer,Integer>(i/3,0);
+            }
+            if(boardSpacesByCol.substring(i,i+3).compareTo(new String(new char[] {otherSymbol, ' ' ,otherSymbol }))==0){
+                return new Pair<Integer,Integer>(i/3,1);
+            }
+        }
         for(int i=0;i<6;i+=3){
-            if(diagonals.substring(i,i+3).compareTo(new char[] {otherSymbol, otherSymbol, ' ' }.toString())==0){
-                return new Pair<Integer,Integer>(2,2);
+            if(i<3){
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {otherSymbol, otherSymbol, ' ' }))==0){
+                    return new Pair<Integer,Integer>(2,2);
+                }
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {' ', otherSymbol, otherSymbol }))==0){
+                    return new Pair<Integer,Integer>(0,0);
+                }
             }
-            if(diagonals.substring(i,i+3).compareTo(new char[] {' ', otherSymbol, otherSymbol }.toString())==0){
-                return new Pair<Integer,Integer>(0,0);
+            else{
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {otherSymbol, otherSymbol, ' ' }))==0){
+                    return new Pair<Integer,Integer>(0,2);
+                }
+                if(diagonals.substring(i,i+3).compareTo(new String(new char[] {' ', otherSymbol, otherSymbol }))==0){
+                    return new Pair<Integer,Integer>(2,0);
+                }
             }
-            if(diagonals.substring(i,i+3).compareTo( new char[] {otherSymbol, ' ' ,otherSymbol }.toString())==0){
+            if(diagonals.substring(i,i+3).compareTo( new String(new char[] {otherSymbol, ' ' ,otherSymbol }))==0){
                 return new Pair<Integer,Integer>(1,1);
             }
         }
