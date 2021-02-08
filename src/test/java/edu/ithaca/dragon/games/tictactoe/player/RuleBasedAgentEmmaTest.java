@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import edu.ithaca.dragon.games.tictactoe.board.TwoDArrayBoard;
 
-public class SRPlayerTest {
+public class RuleBasedAgentEmmaTest {
     
     @Test
     public void chooseSquaresTest(){
-        SRPlayer player = new SRPlayer();
+        RuleBasedAgentEmma player = new RuleBasedAgentEmma();
         //assertEquals(new Pair<>(0,0), player.chooseSquare(new TwoDArrayBoard("         "), 'X'));
         assertEquals(new Pair<>(2, 0), player.chooseSquare(new TwoDArrayBoard("OO   X   "), 'O'));
         assertEquals(new Pair<>(2, 2), player.chooseSquare(new TwoDArrayBoard(" X   XOO "), 'O'));
