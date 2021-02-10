@@ -13,7 +13,7 @@ public class RuleBasedAgentEmmaTest {
     @Test
     public void chooseSquaresTest(){
         RuleBasedAgentEmma player = new RuleBasedAgentEmma();
-        //assertEquals(new Pair<>(0,0), player.chooseSquare(new TwoDArrayBoard("         "), 'X'));
+        assertEquals(new Pair<>(0,0), player.chooseSquare(new TwoDArrayBoard("         "), 'X'));
         assertEquals(new Pair<>(2, 0), player.chooseSquare(new TwoDArrayBoard("OO   X   "), 'O'));
         assertEquals(new Pair<>(2, 2), player.chooseSquare(new TwoDArrayBoard(" X   XOO "), 'O'));
         assertEquals(new Pair<>(0, 2), player.chooseSquare(new TwoDArrayBoard("O  O X   "), 'O'));
